@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+   database:
+        build: ./database
+        container_name: database
+        environment:
+          MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+        expose:
+        - 3306
+   backend:
+        build: ./backend
+        container_name: backend
+        environment:
+          SECRET_KEY: $SECRET_KEY
+          DATABASE_URI: $DATABASE_URI
+        expose:
+        - 5001
+        depends_on:
+          - "database"
+   frontend:
+        build: ./frontend
+        container_name: frontend
+        expose:
+        - 5000
+        depends_on:
+          - "backend"
+   nginx:
+        image: nginx
+        container_name: nginx
+        ports:
+        - target: 80
+          published: 80
+        volumes:
+        - type: bind
+          source: ./nginx/nginx.conf
+          target: /etc/nginx/nginx.conf
+        depends_on:
+          - "frontend"
+
+
+                                            
