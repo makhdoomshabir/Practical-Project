@@ -1,9 +1,16 @@
 pipeline{
         agent any
         stages{
+            stage('Setup') {
+                steps {
+                   dir ('Practical-Project') {
+                       deleteDir()
+                }
+            }
+       }         
             stage('Git clone'){
                 steps{
-                    sh "git clone "
+                    sh "git clone https://github.com/makhdoomshabir/Practical-Project.git "
                 }
             }
             stage('Docker and docker-compose installation'){
@@ -20,7 +27,7 @@ pipeline{
             }
             stage('deploy'){
                 steps{
-                    sh 'sudo docker-compose up -d'
+                    sh "sudo docker-compose up -d"
                 }
             }
         }    
