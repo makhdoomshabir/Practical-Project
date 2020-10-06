@@ -32,7 +32,10 @@ pipeline{
                     export DATABASE_URI
                     export SECRET_KEY
                     export MYSQL_ROOT_PASSWORD
-                    sudo -e DATABASE_URI=${DATABASE_URI} -e SECRET_KEY=${SECRET_KEY} -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} docker-compose up -d
+                    #sudo -e DATABASE_URI=${DATABASE_URI} -e SECRET_KEY=${SECRET_KEY} -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} docker-compose up -d
+                    sudo -E MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY} docker-compose pull
+                    sudo -E MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY} docker-compose up -d --build
+
                     '''
                 }
             }
