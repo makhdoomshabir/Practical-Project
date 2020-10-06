@@ -1,7 +1,12 @@
 pipeline{
         agent any
         stages{
-            stage('Docker'){
+            stage('Git clone'){
+                steps{
+                    sh "git clone "
+                }
+            }
+            stage('Docker and docker-compose installation'){
                 steps{
                     sh '''
                     curl https://get.docker.com | sudo bash
@@ -13,7 +18,7 @@ pipeline{
                     '''
                 }
             }
-            stage('compose up'){
+            stage('deploy'){
                 steps{
                     sh 'sudo docker-compose up -d'
                 }
