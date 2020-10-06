@@ -25,9 +25,15 @@ pipeline{
                     '''
                 }
             }
+                
             stage('deploy'){
                 steps{
-                    sh "sudo docker-compose up -d"
+                    sh '''
+                    export DATABASE_URI
+                    export SECRET_KEY
+                    export MYSQL_ROOT_PASSWORD
+                    sudo docker-compose up -d
+                    '''
                 }
             }
         }    
