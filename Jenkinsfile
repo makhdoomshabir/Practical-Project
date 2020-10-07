@@ -40,7 +40,7 @@ pipeline{
                 
             stage('deploy'){
                 steps{
-                    node{
+                    script{
                         withCredentials([string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'MYSQL_ROOT_PASSWORD')]){
                             echo "sql password is '${SECRET}'" 
                         }
