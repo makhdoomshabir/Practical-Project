@@ -1,10 +1,5 @@
 pipeline{
         agent any
-        environment{
-            SECRET_KEY = credentials('SECRET_KEY')
-            DATABASE_URI = credentials('DATABASE_URI')
-            MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
-                }
         stages{
             stage('Setup') {
                 steps {
@@ -30,6 +25,18 @@ pipeline{
                     '''
                 }
             }
+                           
+           /*SECRET_KEY = credentials('SECRET_KEY')
+            DATABASE_URI = credentials('DATABASE_URI')
+            MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
+                
+            withCredentials([
+                usernamePassword(credentialsId: credsId1, usernameVariable: 'USER1', passwordVariable: 'PASS1'),
+                usernamePassword(credentialsId: credsId2, usernameVariable: 'USER2', passwordVariable: 'PASS2')
+            ]){
+            echo 
+            }
+            */    
                 
             stage('deploy'){
                 steps{
