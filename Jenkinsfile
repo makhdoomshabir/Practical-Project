@@ -29,13 +29,6 @@ pipeline{
            /*SECRET_KEY = credentials('SECRET_KEY')
             DATABASE_URI = credentials('DATABASE_URI')
             MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
-                
-            withCredentials([
-                usernamePassword(credentialsId: credsId1, usernameVariable: 'USER1', passwordVariable: 'PASS1'),
-                usernamePassword(credentialsId: credsId2, usernameVariable: 'USER2', passwordVariable: 'PASS2')
-            ]){
-            echo 
-            }
             */    
                 
             stage('deploy'){
@@ -44,7 +37,10 @@ pipeline{
                         withCredentials([string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'MYSQL_ROOT_PASSWORD')]){
                             echo "sql password is '${MYSQL_ROOT_PASSWORD}'" 
                         }
-                        sh "sudo -E MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD docker-compose up -d"
+                        sh '''
+                        export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+                        sudo -E MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD docker-compose up -d
+                        '''
                     }
                 }
             }
