@@ -36,7 +36,7 @@ pipeline{
                     script{
                         withCredentials([string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'ABC')]){
                             echo "sql password is '${ABC}'" 
-                            sh "docker-compose up -d"
+                            sh "sudo -E MYSQL_ROOT_PASSWORD=$ABC  docker-compose up -d"
                         }
                    /*     sh '''
                         cd Practical-Project
