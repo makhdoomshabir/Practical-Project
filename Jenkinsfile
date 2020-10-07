@@ -13,7 +13,7 @@ pipeline{
                     sh "git clone https://github.com/makhdoomshabir/Practical-Project.git "
                 }
             }
-            stage('Docker and docker-compose installation'){
+   /*         stage('Docker and docker-compose installation'){
                 steps{
                     sh '''
                     curl https://get.docker.com | sudo bash
@@ -24,13 +24,8 @@ pipeline{
                     sudo chmod +x /usr/local/bin/docker-compose
                     '''
                 }
-            }
-                           
-           /*SECRET_KEY = credentials('SECRET_KEY')
-            DATABASE_URI = credentials('DATABASE_URI')
-            MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
-            */    
-                
+            } 
+            */
             stage('deploy'){
                 steps{
                     script{
