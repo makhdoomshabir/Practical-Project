@@ -1,0 +1,8 @@
+- hosts: Jenkins
+  # run as the root user on the remote machine
+  become: true
+  # list of tasks to run on the remote machine
+  tasks:
+  - name: 'install jenkins'
+    script: installjenkins.sh
+
