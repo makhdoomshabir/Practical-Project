@@ -1,5 +1,10 @@
 pipeline{
         agent any
+        environment{
+            SECRET_KEY = credentials('SECRET_KEY')
+            DATABASE_URI = credentials('DATABASE_URI')
+            MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
+                }
         stages{
             stage('Setup') {
                 steps {
@@ -23,20 +28,6 @@ pipeline{
                     sudo curl -L "https://github.com/docker/compose/releases/download/${version}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
                     sudo chmod +x /usr/local/bin/docker-compose
                     '''
-                }
-            }
-            stage('Environment'){
-                environment{
-                        SECRET_KEY = credentials('SECRET_KEY')
-                        DATABASE_URI = credentials('DATABASE_URI')
-                        MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
-                }
-                steps{
-                    sh '''
-                        SECRET_KEY = credentials('SECRET_KEY')
-                        DATABASE_URI = credentials('DATABASE_URI')
-                        MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
-                        '''
                 }
             }
                 
