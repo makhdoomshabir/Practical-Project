@@ -32,15 +32,19 @@ pipeline{
                         MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
                 }
                 steps{
-                    sh "echo 'SECRET_KEY is $SECRET_KEY, database_uri is $DATABASE_URI, mysql password is $MYSQL_ROOT_PASSWORD' "
+                    sh '''
+                        SECRET_KEY = credentials('SECRET_KEY')
+                        DATABASE_URI = credentials('DATABASE_URI')
+                        MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
+                        '''
                 }
             }
                 
             stage('deploy'){
                 steps{
                     sh '''
-                     
-                    sudo -E MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD docker-compose up -d
+                    echo 'SECRET_KEY is $SECRET_KEY, database_uri is $DATABASE_URI, mysql password is $MYSQL_ROOT_PASSWORD'
+                    sudo docker-compose up -d
                     '''
                 }
             }
