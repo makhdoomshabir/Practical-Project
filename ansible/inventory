@@ -1,8 +1,8 @@
 [Jenkins]
 #dns of EC2 instance
-ec2-54-247-26-1.eu-west-1.compute.amazonaws.com
+ec2-18-132-47-39.eu-west-2.compute.amazonaws.com
 
 [Jenkins:vars]
 ansible_user=ubuntu
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-ansible_ssh_private_key_file=~/Downloads/crudsolution.pem
+ansible_ssh_private_key_file=~/Downloads/ansible.pem
