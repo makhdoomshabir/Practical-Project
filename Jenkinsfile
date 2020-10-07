@@ -39,6 +39,7 @@ pipeline{
             stage('deploy'){
                 steps{
                     sh '''
+                    export MYSQL_ROOT_PASSWORD
                     sudo docker-compose up -d
                     '''
                 }
