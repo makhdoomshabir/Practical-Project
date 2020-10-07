@@ -42,7 +42,7 @@ pipeline{
                         echo $(whoami)
                         echo $(pwd)
                         export MYSQL_ROOT_PASSWORD=$ABC
-                        sudo -E MYSQL_ROOT_PASSWORD=$ABC docker-compose up -d
+                        sudo -E MYSQL_ROOT_PASSWORD=password docker-compose up -d
                         '''
                     }
                 }
