@@ -34,10 +34,10 @@ pipeline{
             stage('deploy'){
                 steps{
                     script{
-                        withCredentials([string
-                                (credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'MYSQL_ROOT_PASSWORD'),
-                                (credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI'),
-                                (credentialsId: 'SECRET_KEY', variable: 'SECRET_KEY')
+                        withCredentials([
+                                string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'MYSQL_ROOT_PASSWORD'),
+                                string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI'),
+                                string(credentialsId: 'SECRET_KEY', variable: 'SECRET_KEY')
                         ]){
                             echo "sql password is '${MYSQL_ROOT_PASSWORD}, DATABASE IS $DATABASE_URI, SECRET KEY IS $SECRET_KEY'" 
                             sh "sudo -E MYSQL_ROOT_PASSWORD=$ABC SECRET_KEY=$SECRET_KEY DATABASE_URI=$DATABASE_URI docker-compose up -d"
