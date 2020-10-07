@@ -38,6 +38,7 @@ pipeline{
                             echo "sql password is '${ABC}'" 
                         }
                         sh '''
+                        cd Practical-Project
                         echo $(whoami)
                         echo $(pwd)
                         export MYSQL_ROOT_PASSWORD=$ABC
