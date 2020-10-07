@@ -41,7 +41,7 @@ pipeline{
             stage('deploy'){
                 steps{
                     node{
-                        withCredentials(string[credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'MYSQL_ROOT_PASSWORD']){
+                        withCredentials([string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'MYSQL_ROOT_PASSWORD')]){
                             echo "sql password is '${SECRET}'" 
                         }
                         sh "sudo docker-compose up -d"
