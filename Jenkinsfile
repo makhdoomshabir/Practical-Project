@@ -40,7 +40,7 @@ pipeline{
                 steps{
                     sh '''
                      
-                    sudo -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD docker-compose up -d
+                    sudo -E MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD docker-compose up -d
                     '''
                 }
             }
