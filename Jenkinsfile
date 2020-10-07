@@ -40,7 +40,7 @@ pipeline{
                                 string(credentialsId: 'SECRET_KEY', variable: 'SECRET_KEY')
                         ]){
                             echo "sql password is '${MYSQL_ROOT_PASSWORD}, DATABASE IS $DATABASE_URI, SECRET KEY IS $SECRET_KEY'" 
-                            sh "sudo -E MYSQL_ROOT_PASSWORD=$ABC SECRET_KEY=$SECRET_KEY DATABASE_URI=$DATABASE_URI docker-compose up -d"
+                            sh "sudo -E MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD SECRET_KEY=$SECRET_KEY DATABASE_URI=$DATABASE_URI docker-compose up -d"
                         }
 
                     }
