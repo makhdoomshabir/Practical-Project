@@ -13,7 +13,7 @@ pipeline{
                     sh "git clone https://github.com/makhdoomshabir/Practical-Project.git "
                 }
             }
-   /*         stage('Docker and docker-compose installation'){
+            stage('Docker and docker-compose installation'){
                 steps{
                     sh '''
                     curl https://get.docker.com | sudo bash
@@ -25,21 +25,40 @@ pipeline{
                     '''
                 }
             } 
-            */
+            
             stage('deploy'){
                 steps{
                     script{
                         withCredentials([
+                                file(credentialsId: 'PEM_KEY', variable: 'PEM_KEY'),
                                 string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'MYSQL_ROOT_PASSWORD'),
+                                string(credentialsId: 'TEST_DATABASE_URI', variable: 'TEST_DATABASE_URI'),
                                 string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI'),
                                 string(credentialsId: 'SECRET_KEY', variable: 'SECRET_KEY')
                         ]){
-                            echo "sql password is '${MYSQL_ROOT_PASSWORD}, DATABASE IS $DATABASE_URI, SECRET KEY IS $SECRET_KEY'" 
-                            sh "sudo -E MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD SECRET_KEY=$SECRET_KEY DATABASE_URI=$DATABASE_URI docker-compose up -d"
+                            echo "sql_password is '$MYSQL_ROOT_PASSWORD, DATABASE IS $DATABASE_URI, SECRET KEY IS $SECRET_KEY'" 
+                            sh '''
+                            ssh -tt -o "StrictHostKeyChecking=no" -i $PEM_KEY DNS << EOF 
+                            git clone -b development https://github.com/makhdoomshabir/Practical-Project.git
+                            cd Practical-Project
+                            export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$DATABASE_URI 
+                            sudo -E MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$DATABASE_URI docker-compose up -d
+                            '''
                         }
 
                     }
                 }
             }
+            stage('pytest coverage report'){
+                steps{
+                    sh '''
+                    docker exec -it backend bash
+                    pytest --cov application >> Pytest-coverage-report
+                    exit
+                    EOF
+                    '''
+                }
+            }
+                
         }    
 }
