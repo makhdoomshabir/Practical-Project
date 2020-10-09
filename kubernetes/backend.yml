@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: backend
+        image: makhdoom-backend
         ports:
         - containerPort: 5001
         env:
