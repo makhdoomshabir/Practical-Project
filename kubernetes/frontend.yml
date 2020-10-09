@@ -27,6 +27,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: makhdoom-frontend
+        image: makhdoom98/frontend
         ports:
         - containerPort: 5000
