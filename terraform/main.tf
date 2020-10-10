@@ -1,7 +1,13 @@
 provider "aws" {
-    region = "eu-west-2"
+  version                 = "~> 2.0"
+  region                  = "eu-west-1"
+  shared_credentials_file = "~/.aws/credentials"
 }
-resource "aws_instance" "example" {
-    ami = "ami-09a1e275e350acf38"
-    instance_type = "t2.micro"
+
+resource "aws_instance" "EC2" {
+  count = 2
+  ami           = var.ami-id
+  instance_type = var.instance-type
+  key_name      = var.pem-key
+
 }
