@@ -1,14 +1,6 @@
 pipeline{
         agent any
         stages{            
-            stage ('test ssh') {
-                steps{
-                   sshagent(credentials : ['$PEM_KEY']) {
-                       sh 'ssh -o StrictHostKeyChecking=no -i $PEM_KEY ec2-54-75-81-173.eu-west-1.compute.amazonaws.com uptime'
-                   }
-                }
-        }    
-                
             stage('deploy'){
                 steps{
                     script{
@@ -19,7 +11,7 @@ pipeline{
                                 string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI'),
                                 string(credentialsId: 'SECRET_KEY', variable: 'SECRET_KEY')
                         ]){
-                            echo "DATABASE IS $DATABASE_URI, SECRET KEY IS $SECRET_KEY'" 
+                            echo "DATABASE IS $DATABASE_URI, SECRET KEY IS $SECRET_KEY" 
                             sh '''
                             chmod 400 $PEM_KEY
                             ssh -tt -o "StrictHostKeyChecking=no" -i $PEM_KEY ec2-54-75-81-173.eu-west-1.compute.amazonaws.com << EOF 
