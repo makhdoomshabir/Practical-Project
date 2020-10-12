@@ -1,6 +1,7 @@
 [Jenkins]
 #dns of EC2 instance
-ec2-18-132-47-39.eu-west-2.compute.amazonaws.com
+ec2-54-75-81-173.eu-west-1.compute.amazonaws.com
+ec2-3-250-189-234.eu-west-1.compute.amazonaws.com
 
 [Jenkins:vars]
 ansible_user=ubuntu
