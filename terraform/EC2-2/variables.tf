@@ -10,5 +10,5 @@ variable "instance-type" {
 
 variable "pem-key" {
   description = "Associated Key to SSH into the EC2 Instance"
-  default     = "crud solution"
+  default     = "instance-1"
 }
