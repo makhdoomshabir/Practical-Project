@@ -1,31 +1,6 @@
 pipeline{
         agent any
-        stages{
-            stage('Setup') {
-                steps {
-                   dir ('Practical-Project') {
-                       deleteDir()
-                }
-            }
-       }         
-            stage('Git clone'){
-                steps{
-                    sh "git clone https://github.com/makhdoomshabir/Practical-Project.git "
-                }
-            }
-            stage('Docker and docker-compose installation'){
-                steps{
-                    sh '''
-                    curl https://get.docker.com | sudo bash
-                    sudo usermod -aG docker $(whoami)
-                    sudo apt install -y curl jq
-                    version=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r '.tag_name')
-                    sudo curl -L "https://github.com/docker/compose/releases/download/${version}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-                    sudo chmod +x /usr/local/bin/docker-compose
-                    '''
-                }
-            } 
-            
+        stages{            
             stage('deploy'){
                 steps{
                     script{
@@ -38,11 +13,12 @@ pipeline{
                         ]){
                             echo "sql_password is '$MYSQL_ROOT_PASSWORD, DATABASE IS $DATABASE_URI, SECRET KEY IS $SECRET_KEY'" 
                             sh '''
-                            ssh -tt -o "StrictHostKeyChecking=no" -i $PEM_KEY DNS << EOF 
+                            ssh -tt -o "StrictHostKeyChecking=no" -i $PEM_KEY ec2-54-75-81-173.eu-west-1.compute.amazonaws.com << EOF 
+                            rm -rf Practical-Project/
                             git clone -b development https://github.com/makhdoomshabir/Practical-Project.git
                             cd Practical-Project
-                            export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$DATABASE_URI 
-                            sudo -E MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$DATABASE_URI docker-compose up -d
+                            export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$TEST_DATABASE_URI DATABASE_URI=$DATABASE_URI
+                            sudo -E MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$TEST_DATABASE_URI DATABASE_URI=$DATABASE_URI docker-compose up -d
                             '''
                         }
 
