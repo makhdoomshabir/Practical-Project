@@ -1,6 +1,14 @@
 pipeline{
         agent any
         stages{            
+            stage ('test ssh') {
+                steps{
+                   sshagent(credentials : ['$PEM_KEY']) {
+                       sh 'ssh -o StrictHostKeyChecking=no -i $PEM_KEY ec2-54-75-81-173.eu-west-1.compute.amazonaws.com uptime'
+                   }
+                }
+        }    
+                
             stage('deploy'){
                 steps{
                     script{
