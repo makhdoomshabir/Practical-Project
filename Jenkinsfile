@@ -14,7 +14,7 @@ pipeline{
                             sh '''
                             ssh -tt -o "StrictHostKeyChecking=no" -i $PEM_KEY ubuntu@ec2-54-75-81-173.eu-west-1.compute.amazonaws.com << EOF 
                             rm -rf Practical-Project/
-                            git clone -b development https://github.com/makhdoomshabir/Practical-Project.git
+                            git clone https://github.com/makhdoomshabir/Practical-Project.git
                             cd Practical-Project
                             export SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$TEST_DATABASE_URI DATABASE_URI=$DATABASE_URI
                             sudo -E SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$TEST_DATABASE_URI DATABASE_URI=$DATABASE_URI docker-compose up -d
