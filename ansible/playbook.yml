@@ -7,3 +7,6 @@
     script: installjenkins.sh
   - name: 'install docker'
     script: docker.sh
+  - name: 'install docker-compose'
+    script: docker-compose.sh
+
