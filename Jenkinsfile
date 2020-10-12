@@ -1,6 +1,7 @@
 pipeline{
         agent any
-         stage('WHERE AM I'){
+        stages{  
+            stage('WHERE AM I'){
                 steps{
                     sh '''
                     ls -la
@@ -9,7 +10,7 @@ pipeline{
                     '''
                 }
             }
-        stages{            
+                
             stage('deploy'){
                 steps{
                     script{
