@@ -20,6 +20,7 @@ pipeline{
                             cd Practical-Project
                             export SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$TEST_DATABASE_URI DATABASE_URI=$DATABASE_URI
                             sudo -E SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$TEST_DATABASE_URI DATABASE_URI=$DATABASE_URI docker-compose up -d
+                            EOF
                             '''
                         }
 
