@@ -11,7 +11,6 @@ pipeline{
                                 string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI'),
                                 string(credentialsId: 'SECRET_KEY', variable: 'SECRET_KEY')
                         ]){
-                            echo "DATABASE IS $DATABASE_URI, SECRET KEY IS $SECRET_KEY" 
                             sh '''
                             ssh -tt -o "StrictHostKeyChecking=no" -i $PEM_KEY ec2-176-34-82-220.eu-west-1.compute.amazonaws.com << EOF 
                             rm -rf Practical-Project/
@@ -28,16 +27,7 @@ pipeline{
                     }
                 }
             }
-            stage('pytest coverage report'){
-                steps{
-                    sh '''
-                    docker exec -it backend bash
-                    pytest --cov application >> Pytest-coverage-report
-                    exit
-                    EOF
-                    '''
-                }
-            }
+
                 
         }    
 }
