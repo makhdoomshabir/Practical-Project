@@ -6,7 +6,6 @@ pipeline{
                     script{
                         withCredentials([
                                 file(credentialsId: 'PEM_KEY', variable: 'PEM_KEY'),
-                               // string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'MYSQL_ROOT_PASSWORD'),
                                 string(credentialsId: 'TEST_DATABASE_URI', variable: 'TEST_DATABASE_URI'),
                                 string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI'),
                                 string(credentialsId: 'SECRET_KEY', variable: 'SECRET_KEY')
