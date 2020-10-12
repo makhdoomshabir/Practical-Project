@@ -1,5 +1,14 @@
 pipeline{
         agent any
+         stage('WHERE AM I'){
+                steps{
+                    sh '''
+                    ls -la
+                    pwd
+                    
+                    '''
+                }
+            }
         stages{            
             stage('deploy'){
                 steps{
