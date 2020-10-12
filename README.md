@@ -2,6 +2,10 @@
 
 ## Brief
 
+Deploy flask application and automate in the most efficient way possible, making use of Terraform, Ansible, Kubernetes, Jenkins, Docker, and Docker-Compose as well as a managed database solution using Amazon Web Servers.
+
+### Moscow Prioritisation
+
 Must be:
 
 - Deployed to a test VM
@@ -68,10 +72,20 @@ Project stretch goals:
 
 ### Deploying The Application
 
-1. Spin up the two VM's and RDS's from each directory using 
+1. Spin up the two VM's and RDS's from each directory in terraform using: 
+* terraform init
+* terraform plan
+* terraform apply
+2. Configure ansible in ansible directory using:
+* ansible-playbook -i inventory playbook.yml
+3. Load up jenkins server and build pipeline job
+4. Check public IP address of testing VM as well as production VM to ensure both are deployed
 
-''' 
-terraform init
-terraform plan
-terraform apply
-'''
+### Current Bug(s)
+
+* Unable to connect kubernetes cluster to RDS meaning docker must be used for the time being
+
+### Author
+
+Makhdoom Shabir 
+
