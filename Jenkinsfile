@@ -14,12 +14,14 @@ pipeline{
                             echo "DATABASE IS $DATABASE_URI, SECRET KEY IS $SECRET_KEY" 
                             sh '''
                             chmod 400 instance-1.pem
-                            ssh -tt -o "StrictHostKeyChecking=no" -i instance-1.pem ec2-54-75-81-173.eu-west-1.compute.amazonaws.com << EOF 
+                            ssh -tt -o "StrictHostKeyChecking=no" -i $PEM_KEY ec2-54-75-81-173.eu-west-1.compute.amazonaws.com << EOF 
                             rm -rf Practical-Project/
                             git clone -b development https://github.com/makhdoomshabir/Practical-Project.git
                             cd Practical-Project
                             export SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$TEST_DATABASE_URI DATABASE_URI=$DATABASE_URI
                             sudo -E SECRET_KEY=$SECRET_KEY TEST_DATABASE_URI=$TEST_DATABASE_URI DATABASE_URI=$DATABASE_URI docker-compose up -d
+                            docker exec backend pytest --cov application >> Pytest-coverage-report
+                            exit
                             EOF
                             '''
                         }
