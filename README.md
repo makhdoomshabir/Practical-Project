@@ -46,5 +46,32 @@ Project MVP:
 
 Project stretch goals:
 
-![stretch-digram](https://i.imgur.com/Q5zljVl.png)
+![stretch-diagram](https://i.imgur.com/Q5zljVl.png)
 
+### Risk Assessment
+
+![risk-assessment](https://github.com/makhdoomshabir/Practical-Project/blob/master/documentation/risk%20assessment.png)
+
+### Jira Board Sprints
+
+![sprint-one](https://github.com/makhdoomshabir/Practical-Project/blob/master/documentation/D.S.1.png)
+
+![sprint-two](https://github.com/makhdoomshabir/Practical-Project/blob/master/documentation/D.S.2.png)
+
+![sprint-three](https://github.com/makhdoomshabir/Practical-Project/blob/master/documentation/D.S.3.png)
+
+![sprint-four](https://github.com/makhdoomshabir/Practical-Project/blob/master/documentation/D.S.4.png)
+
+![sprint-five](https://github.com/makhdoomshabir/Practical-Project/blob/master/documentation/D.S.5.png)
+
+![sprint-six](https://github.com/makhdoomshabir/Practical-Project/blob/master/documentation/D.S.6.png)
+
+### Deploying The Application
+
+1. Spin up the two VM's and RDS's from each directory using 
+
+''' 
+terraform init
+terraform plan
+terraform apply
+'''
