@@ -14,7 +14,7 @@ pipeline{
                             echo "DATABASE IS $DATABASE_URI, SECRET KEY IS $SECRET_KEY" 
                             sh '''
                             chmod 400 instance-1.pem
-                            ssh -tt -o "StrictHostKeyChecking=no" -i $PEM_KEY ec2-54-75-81-173.eu-west-1.compute.amazonaws.com << EOF 
+                            ssh -tt -o "StrictHostKeyChecking=no" -i $PEM_KEY ec2-176-34-82-220.eu-west-1.compute.amazonaws.com << EOF 
                             rm -rf Practical-Project/
                             git clone -b development https://github.com/makhdoomshabir/Practical-Project.git
                             cd Practical-Project
