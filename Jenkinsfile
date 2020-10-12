@@ -15,7 +15,7 @@ pipeline{
                             sh '''
                             export PEM_KEY=$PEM_KEY
                             chmod 400 $PEM_KEY
-                            ssh -tt -o "StrictHostKeyChecking=no" -i instance-1.pem ec2-54-75-81-173.eu-west-1.compute.amazonaws.com << EOF 
+                            ssh -tt -o "StrictHostKeyChecking=no" -i $PEM_KEY ec2-54-75-81-173.eu-west-1.compute.amazonaws.com << EOF 
                             rm -rf Practical-Project/
                             git clone -b development https://github.com/makhdoomshabir/Practical-Project.git
                             cd Practical-Project
