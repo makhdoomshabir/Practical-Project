@@ -25,6 +25,7 @@ pipeline{
                             sh '''
                             chmod 400 $PEM_KEY
                             cd pem_key
+                            ls
                             ssh -tt -o "StrictHostKeyChecking=no" -i instance-1.pem ec2-54-75-81-173.eu-west-1.compute.amazonaws.com << EOF 
                             rm -rf Practical-Project/
                             git clone -b development https://github.com/makhdoomshabir/Practical-Project.git
