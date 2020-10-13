@@ -1,7 +1,7 @@
 pipeline{
         agent any
         stages{  
-            stage('deploys'){
+            stage('deploy'){
                 steps{
                     script{
                         withCredentials([
