@@ -46,13 +46,25 @@ The application works by:
 
 Project MVP: 
 
+* TF builds jenkins EC2 instance and two RDS's on AWS
+* Ansible configures jenkins VM 
+* Jenkins pipeline job runs docker containers on second VM
+* Jenkins runs Kubernetes pods
+* Test VM and Kubernetes cluster connected to an RDS each
+
 ![mvp-diagram](https://i.imgur.com/i5qfOas.png)
 
 Project stretch goals:
 
+* TF builds test VM
+* Ansible configures test VM
+* TF manages Kubernetes cluster
+
 ![stretch-diagram](https://i.imgur.com/Q5zljVl.png)
 
 ### Risk Assessment
+
+Demonstrates some of the risks that must be considered prior to the application being deployed:
 
 ![risk-assessment](https://github.com/makhdoomshabir/Practical-Project/blob/master/documentation/risk%20assessment.png)
 
